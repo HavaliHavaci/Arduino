@@ -1,0 +1,24 @@
+int sensorPin = 15;       // CNY70
+int ledPin = 13;          // LED
+int sensorValue = 0;      // Value that is read from sensor 
+int threshold = 900;      // Threshold value, it controls if value exceed it
+
+void setup() {
+  Serial.begin(9600);   
+  pinMode(ledPin, OUTPUT);
+}
+
+void loop() {
+  sensorValue = analogRead(sensorPin); // Read sensor value
+  Serial.print("Sensor Degeri = ");
+  Serial.println(sensorValue);
+
+  // Compare sensor and threshold values
+  if (sensorValue > threshold) {
+    digitalWrite(ledPin, HIGH); // If it exceeds, turn on the LED
+  } else {
+    digitalWrite(ledPin, LOW);  // If it doesn't exceed, turn off the LED
+  }
+
+  delay(250); // stop 250ms
+}
