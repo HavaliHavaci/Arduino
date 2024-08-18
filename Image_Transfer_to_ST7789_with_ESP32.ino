@@ -1,0 +1,70 @@
+//Include Block
+//------------------------------------------------
+#include <stdio.h> 
+#include <stdlib.h> 
+#include <Adafruit_GFX.h>    
+#include <Adafruit_ST7789.h> 
+#include <SPI.h> 
+#include <SPIFFS.h>
+
+//------------------------------------------------
+//Define Block
+#define TFT_CS                -1
+#define TFT_RST                4  //Res
+#define TFT_DC                15  //DC
+#define TFT_SCLK              18  //SCL
+#define TFT_MOSI              23  //SDA
+//#define 
+//-----------------------------------------------
+
+//Static Const Block
+static const uint16_t disp1[] = {};
+
+//Const Block
+//-----------------------------------------------
+
+Adafruit_ST7789 tft         = Adafruit_ST7789(TFT_CS, TFT_DC, TFT_RST);
+
+//Variable Block
+//------------------------------------------------
+//Void Block
+//------------------------------------------------
+
+void    setup_display();
+void    print_display(byte x_pos, byte y_pos, char* text, byte text_size, uint16_t color);
+
+//------------------------------------------------
+//Display Setup
+//------------------------------------------------
+
+void setup_display(){
+tft.init(240, 240, SPI_MODE3);
+tft.setRotation(2);
+}
+
+//------------------------------------------------
+//Main Setup
+//------------------------------------------------
+
+void setup(){
+setup_display();
+}
+
+//------------------------------------------------
+
+void print_display(byte x_pos, byte y_pos, char* text, byte text_size, uint16_t color) {
+tft.setCursor(x_pos, y_pos);
+tft.setTextSize(text_size);
+tft.setTextColor(color);
+tft.setTextWrap(true);
+tft.print(text);
+}
+
+void loop(){
+tft.fillScreen(ST77XX_WHITE);
+print_display(0,20,"Modunuz Nedir?",3,ST77XX_RED);
+delay(1500);
+tft.drawRGBBitmap(0,0,disp1,240,240);
+while(true);
+}
+  
